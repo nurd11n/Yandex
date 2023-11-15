@@ -24,7 +24,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class CarViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.all()
     serializer_class = CarSerializer
-    permission_classes = [IsAdminUser, IsDriverProfile]
+    permission_classes = [IsAdminUser]
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['car_model', 'color', 'category']
     search_fields = ['car_model', 'created_at', 'description']

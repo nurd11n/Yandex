@@ -74,6 +74,20 @@ class DriverOnlyView(generics.RetrieveAPIView):
     permission_classes = [IsDriverProfile, IsAuthenticated]
     serializer_class = UserSerializer
 
+    # @action(['POST'], detail=True)
+    # def like(self, request, pk=None):
+    #     product = self.get_object()
+    #     user = request.user
+    #     try:
+    #         like = Like.objects.get(product=product, author=user)
+    #         like.delete()
+    #         message = 'disliked'
+    #     except Like.DoesNotExist:
+    #         like = Like.objects.create(product=product, author=user)
+    #         like.save()
+    #         message = 'liked'
+    #     return Response(message)
+
     def get_object(self):
         return self.request.user
 

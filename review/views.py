@@ -1,8 +1,5 @@
 import logging
-from django.http import JsonResponse
-from rest_framework import generics
-from rest_framework.decorators import action
-from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from review.models import Comment, Rating, Favourites
 from review.serializers import CommentSerializer, RatingSerializer, FavouritesSerializer
@@ -21,13 +18,16 @@ def my_view(request):
 class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class RatingViewSet(ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class FavouriteViewSet(ModelViewSet):
     queryset = Favourites.objects.all()
     serializer_class = FavouritesSerializer
+    permission_classes = [IsAuthenticated]
