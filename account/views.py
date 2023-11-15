@@ -90,22 +90,16 @@ class ChangePasswordView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class RecommendationView(APIView):
-#     permission_classes = [IsAuthenticated]
-#
-#     def get(self, request):
-#         user = request.user
-#
-#         latest_ratings = Rating.objects.filter(user=user).order_by('-created_at')[:5]
-#         if len(latest_ratings) < 10:
-#             latest_ratings = Rating.objects.filter(user=user)
-#
-#         tags = []
-#         for rating in latest_ratings:
-#             film = rating.film
-#             tags += film.tags.all()
-#
-#         return Response(.data)
+class RecommendationView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+
+        latest_ratings = Rating.objects.filter(user=user).order_by('-created_at')[:5]
+        if len(latest_ratings) < 10:
+            latest_ratings = Rating.objects.filter(user=user)
+        return latest_ratings
 
 
 

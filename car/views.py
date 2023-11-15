@@ -29,11 +29,11 @@ class CarViewSet(viewsets.ModelViewSet):
     filterset_fields = ['car_model', 'color', 'category']
     search_fields = ['car_model', 'created_at', 'description']
 
-    # @method_decorator(cache_page(60*5))
-    # def retrieve(self, request, *args, **kwargs):
-    #     return super().retrieve(request, *args, **kwargs)
-    #
-    # @method_decorator(cache_page(60*2))
-    # def list(self, request, *args, **kwargs):
-    #     return super().list(request, *args, **kwargs)
+    @method_decorator(cache_page(60*5))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60*2))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
