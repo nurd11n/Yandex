@@ -41,7 +41,7 @@ class DriverSignUpView(generics.GenericAPIView):
 class ActivationView(APIView):
     def get(self, request, email, activation_code):
         try:
-            user = User.objects.filter(email=email, activation_code=activation_code)
+            user = User.objects.get(email=email, activation_code=activation_code)
             user.is_active = True
             user.activation_code = ""
             user.save()
