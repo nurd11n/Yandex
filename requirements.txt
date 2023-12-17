@@ -12,3 +12,10 @@ polyline
 beautifulsoup4
 requests
 lxml
+django-filter
+channels
+django-cors-headers
+crispy-bootstrap4
+django-crispy-forms
+celery
+googlemaps
