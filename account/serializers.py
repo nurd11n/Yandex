@@ -34,8 +34,8 @@ class UserSignUpSerializer(serializers.ModelSerializer):
         user.save()
         UserProfile.objects.create(user=user)
         user.create_activation_code()
-        user.save()
         send_activation_code_celery.delay(user.email, user.activation_code)
+        user.save()
         return user
 
 

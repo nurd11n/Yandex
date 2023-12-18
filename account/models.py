@@ -4,9 +4,6 @@ from django.utils.crypto import get_random_string
 from django.db import models
 from car.models import Car
 import re
-from django.db.models.signals import post_save
-from django.conf import settings
-from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from rest_framework.exceptions import ValidationError
 
