@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from car.models import Car
+from map.models import Locations
 
 User = get_user_model()
 
@@ -18,6 +19,8 @@ class Order(models.Model):
         ('Card', 'Card'),
         ('Cash', 'Cash')
     ]
+    location_from = models.ForeignKey(Locations, on_delete=models.CASCADE, related_name='location_from')
+    location_to = models.ForeignKey(Locations, on_delete=models.CASCADE, related_name='location_to')
     payment = models.CharField(max_length=4, choices=PAYMENT_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
