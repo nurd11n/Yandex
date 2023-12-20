@@ -9,6 +9,6 @@ router.register('orders', OrderViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('order/confirm/', OrderActivationAPIView.as_view()),
-    path('order/history/', UserOrderHistoryAPIView.as_view()),
+    path('orders/confirm/', OrderActivationAPIView.as_view()),
+    path('orders/history/', UserOrderHistoryAPIView.as_view()),
 ]

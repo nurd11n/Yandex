@@ -202,9 +202,6 @@ SWAGGER_SETTINGS = {
 }
 
 
-BROKER_URL = 'redis://127.0.0.1:6379/0'
-BROKER_TRANSPORT = 'redis'
-
 LOCATION_FIELD = {
     'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
     'provider.google.api_key': config('MAPS_API'),

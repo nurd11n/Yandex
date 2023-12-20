@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from account.models import DriverProfile
+from map.models import Locations
 
 
 User = get_user_model()
@@ -31,9 +32,17 @@ class Rating(models.Model):
         return f'{self.rating} - {self.ticket}'
 
 
-class Favourites(models.Model):
+class FavouriteDriver(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourites')
     driver = models.ForeignKey(DriverProfile, on_delete=models.CASCADE, related_name='favourites')
+
+    def __str__(self):
+        return f'{self.author} {self.ticket}'
+
+
+class FavouriteLocation(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourite_location')
+    location = models.ForeignKey(Locations, on_delete=models.CASCADE, related_name='favourite_location')
 
     def __str__(self):
         return f'{self.author} {self.ticket}'

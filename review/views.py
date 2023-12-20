@@ -1,8 +1,8 @@
 import logging
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
-from review.models import Comment, Rating, Favourites
-from review.serializers import CommentSerializer, RatingSerializer, FavouritesSerializer
+from review.models import Comment, Rating, FavouriteDriver, FavouriteLocation
+from review.serializers import CommentSerializer, RatingSerializer, FavouritesSerializer, FavouriteLocationSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +28,12 @@ class RatingViewSet(ModelViewSet):
 
 
 class FavouriteViewSet(ModelViewSet):
-    queryset = Favourites.objects.all()
+    queryset = FavouriteDriver.objects.all()
     serializer_class = FavouritesSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class FavouriteLocationsViewSet(ModelViewSet):
+    queryset = FavouriteLocation.objects.all()
+    serializer_class = FavouriteLocationSerializer
     permission_classes = [IsAuthenticated]

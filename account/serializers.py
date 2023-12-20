@@ -4,7 +4,6 @@ from account.models import User, UserProfile, DriverProfile
 from account.tasks import send_activation_code_celery, send_application_celery
 from review.serializers import CommentSerializer
 from car.serializers import CarSerializer
-from car.models import Car
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -29,12 +28,12 @@ class UserSignUpSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create(**validated_data)
+        user.create_activation_code()
+        send_activation_code_celery.delay(user.email, user.activation_code)
         user.set_password(validated_data['password'])
         user.is_user = True
         user.save()
         UserProfile.objects.create(user=user)
-        user.create_activation_code()
-        send_activation_code_celery.delay(user.email, user.activation_code)
         user.save()
         return user
 

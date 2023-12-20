@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from drf_yasg.utils import swagger_auto_schema
+from .tasks import send_activation_code_celery
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -15,6 +16,7 @@ User = get_user_model()
 class UserSignUpView(generics.GenericAPIView):
     serializer_class = UserSignUpSerializer
 
+    @swagger_auto_schema(request_body=UserSignUpSerializer())
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
